@@ -1,0 +1,23 @@
+{
+  "name": "loperkoran",
+  "version": "1.0.0",
+  "description": "loper koran discord ttbb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nugroho-s/loperkoran.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nugroho-s/loperkoran/issues"
+  },
+  "homepage": "https://github.com/nugroho-s/loperkoran#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "newsapi": "^2.4.0"
+  }
+}

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nugroho-s/loperkoran#readme",
   "dependencies": {
+    "@google-cloud/pubsub": "^0.18.0",
     "discord.js": "^11.5.1",
     "newsapi": "^2.4.0"
   }

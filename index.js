@@ -6,6 +6,16 @@ const NewsApi = new api(process.env.NEWSAPI)
 
 const blacklistedSources = ["Tribunnews.com"]
 
+function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return pattern.test(str);
+}
+
 exports.sendNews = (event, context) => {
     NewsApi.v2.topHeadlines({
         country: 'id'
@@ -17,13 +27,12 @@ exports.sendNews = (event, context) => {
                         isBlacklisted = true;
                     }
                 });
-                return !isBlacklisted;
+                return (!isBlacklisted && validURL(article.url));
             }).map(article => ({
+                color: 2257690,
                 url: article.url,
                 thumbnail: {
-                    width: 400,
-                    height: 300,
-                    url: article.urlToImage,
+                    url: article.urlToImage
                 },
                 title: article.title,
                 description: article.description,

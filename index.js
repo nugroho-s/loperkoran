@@ -43,5 +43,7 @@ exports.sendNews = (event, context) => {
         webhook.send("KORAN KORAN!\nAmbil ini, tambahlah ilmu pengetahuan",{
             embeds: embeds
         })
-    });    
+    }).catch((error) => {
+        assert.isNotOk(error,'Promise error');
+    });
 }

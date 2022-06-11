@@ -1,5 +1,5 @@
-const discord = require('discord.js')
-const webhook = new discord.WebhookClient(process.env.ID, process.env.TOKEN)
+const { WebhookClient } = require('discord.js')
+const webhook = new WebhookClient({ url: process.env.WEBHOOK_URL })
 
 const api = require('newsapi')
 const NewsApi = new api(process.env.NEWSAPI)
@@ -40,10 +40,12 @@ exports.sendNews = (event, context) => {
             })).slice(0,5);
         console.log(JSON.stringify(embeds));
         
-        webhook.send("KORAN KORAN!\nAmbil ini, tambahlah ilmu pengetahuan",{
+        webhook.send({
+            content: "KORAN KORAN!\nAmbil ini, tambahlah ilmu pengetahuan",
             embeds: embeds
         })
     }).catch((error) => {
         assert.isNotOk(error,'Promise error');
+        console.log( error.stack )
     });
 }

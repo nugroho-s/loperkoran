@@ -16,10 +16,15 @@ function validURL(str) {
     return pattern.test(str);
 }
 
+function getRandomColor() {
+    return Math.floor(Math.random()*16777215);
+}
+
 exports.sendNews = (event, context) => {
     NewsApi.v2.topHeadlines({
         country: 'id'
     }).then(news => {
+	const randomColor = getRandomColor();
         const embeds = news.articles.filter(function(article){
                 var isBlacklisted = false;
                 blacklistedSources.forEach(source => {
@@ -29,7 +34,7 @@ exports.sendNews = (event, context) => {
                 });
                 return (!isBlacklisted && validURL(article.url));
             }).map(article => ({
-                color: 2257690,
+                color: randomColor,
                 url: article.url,
                 thumbnail: {
                     url: article.urlToImage
